@@ -156,17 +156,9 @@ title('Normalized covariance function of case A')
 %% excercise 2 
 K2 = [ res05.k2 res10a.k2 res10b.k2 res35a.k2 res35b.k2 res50a.k2 res50b.k2]
 
-FL = [ 5^2 10^2 10^2 35^2 35^2 50^2 50^2 ]*10^-4;
+FL = [ 5 10 10 35 35 50 50 ]*10^-4;
 FD = FL.^2*pi/4
 
-C = FL.\K2
+C = Fd.\K2
 
-d_haten = sqrt(res05.k2/C(1));
-d_haten(2) = sqrt(res10a.k2/C);
-d_haten(3) = sqrt(res10b.k2/C);
-d_haten(4) = sqrt(res35a.k2/C);
-d_haten(5) = sqrt(res35b.k2/C);
-d_haten(6) = sqrt(res50a.k2/C);
-d_haten(7) = sqrt(res50b.k2/C);
-d_haten(8) = sqrt(resxx.k2/C);
 
