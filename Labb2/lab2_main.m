@@ -7,7 +7,7 @@ close all
 load diagnosisFile.mat
 
 %% *** Plot data ***
-d = diagnosisSequences.F05;
+d = diagnosisSequences.F00;
 
 figure(1);
 plot( d.time, d.y);
@@ -23,7 +23,7 @@ legend('Diagnosis valve position','Purge valve position');
 f00d =diagseqidx(diagnosisSequences.F00)
 diagnosisSequences.F00.biasIdx  = [952 1011]; %(Samples [start end] for bias estimation) % D open P closed
 diagnosisSequences.F00.diagIdx  = [239 904]; %(Samples [start end] for diagnosis sequence 1)
-diagnosisSequences.F00.diagIdx2 = [1347 2014]; %(Samples [start end] for diagnosis sequence 2)
+diagnosisSequences.F00.diagIdx2 = [1331 2014]; %(Samples [start end] for diagnosis sequence 2)
 
 % f10d =diagseqidx(diagnosisSequences.F10)
 diagnosisSequences.F10.biasIdx  = [1 76];
@@ -153,6 +153,26 @@ title('Normal Probability Plot of case A')
 subplot(2,1,2);
 plot(xcorr(resxx.R))
 title('Normalized covariance function of case A')
+%% test alarms 
+alarm00 = [res00a.T/res00a.J res00b.T/res00b.J] 
+alarm10 = [res10a.T/res10a.J res10b.T/res10b.J]
+alarm35 = [res35a.T/res35a.J res35b.T/res35b.J]
+alarm50 = [res50a.T/res50a.J res50b.T/res50b.J]
+alarm05 = [res05.T]/res05.J ] 
+alarmxx = [resxx.T/resxx.J ]
+
+format longg
+T = [res00a.T res00b.T res10a.T res10b.T res35a.T res35b.T res50a.T...
+    res50b.T res05.T resxx.T]'
+    
+J = [res00a.J res00b.J res10a.J res10b.J res35a.J res35b.J res50a.J...
+    res50b.J res05.J resxx.J]'
+
+
+alarm = [alarm00 alarm10 alarm35 alarm50 alarm05 ]
+FT = [ 0 0 10 10 35 35 50 50 5 ]*10^-4;
+plot(FT,alarm,'r*')
+yline(1)
 %% excercise 2 
 K2 = [ res05.k2 res10a.k2 res10b.k2 res35a.k2 res35b.k2 res50a.k2 res50b.k2]
 
